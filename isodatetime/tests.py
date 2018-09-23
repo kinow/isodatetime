@@ -1506,6 +1506,14 @@ class TestSuite(unittest.TestCase):
             ctrl_data = str(data.TimeRecurrence(**test_info))
             self.assertEqual(test_data, ctrl_data, expression)
 
+    def test_timepoint_dump_format(self):
+        """Test the timepoint format dump when values are programmatically set to None"""
+        t = data.TimePoint(year="1984")
+        # commenting out month_of_year here is enough to make the test pass
+        t.month_of_year = None
+        t.day_of_year = None
+        t.week_of_year = None
+        self.assertEqual("1984-01-01T00:00:00Z", t.__str__())
 
 def assert_equal(data1, data2):
     """A function-level equivalent of the unittest method."""
