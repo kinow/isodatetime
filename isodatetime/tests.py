@@ -20,15 +20,15 @@
 
 import copy
 import multiprocessing
-import unittest
-import mock
+from unittest import TestCase, TestLoader, TextTestRunner
+from unittest.mock import patch, MagicMock, Mock
 
 from . import data
 from . import dumpers
-from . import parsers
 from . import parser_spec
-from . import util
+from . import parsers
 from . import timezone
+from . import util
 
 
 def get_timeduration_tests():
@@ -1045,7 +1045,7 @@ def get_local_time_zone_hours_minutes():
     return utc_offset_hours, utc_offset_minutes
 
 
-class TestSuite(unittest.TestCase):
+class TestSuite(TestCase):
     """Test the functionality of parsers and data model manipulation."""
 
     def assertEqual(self, test, control, info=None):
@@ -1631,7 +1631,7 @@ class TestSuite(unittest.TestCase):
         [-12600, -3, 30]  # america/st_johns, -03:30
     ]
 
-    @mock.patch('isodatetime.timezone.time')
+    @patch('isodatetime.timezone.time')
     def test_get_local_time_zone_no_dst(self, mock_time):
         """Test that the hour/minute returned is correct.
 
@@ -1644,7 +1644,7 @@ class TestSuite(unittest.TestCase):
             # time without dst
             mock_time.daylight = False
             # and localtime also without dst
-            mock_localtime = mock.Mock()
+            mock_localtime = Mock()
             mock_time.localtime.return_value = mock_localtime
             mock_localtime.tm_isdst = 0
             hours, minutes = timezone.get_local_time_zone()
@@ -1663,7 +1663,7 @@ class TestSuite(unittest.TestCase):
         [-12600, -9000, -2, 30]  # america/st_johns, -03:30 and -02:30
     ]
 
-    @mock.patch('isodatetime.timezone.time')
+    @patch('isodatetime.timezone.time')
     def test_get_local_time_zone_with_dst(self, mock_time):
         """Test that the hour/minute returned is correct
 
@@ -1676,7 +1676,7 @@ class TestSuite(unittest.TestCase):
             # time without dst
             mock_time.daylight = True
             # and localtime also without dst
-            mock_localtime = mock.MagicMock()
+            mock_localtime = MagicMock()
             mock_time.localtime.return_value = mock_localtime
             mock_localtime.tm_isdst = 1
             # and with the following alternative time for when dst is set
@@ -1720,7 +1720,7 @@ class TestSuite(unittest.TestCase):
         [-12600, timezone.TimeZoneFormatMode.reduced, "-0330"]
     ]
 
-    @mock.patch('isodatetime.timezone.time')
+    @patch('isodatetime.timezone.time')
     def test_get_local_time_zone_format(self, mock_time):
         """Test that the UTC offset string format is correct
 
@@ -1734,7 +1734,7 @@ class TestSuite(unittest.TestCase):
             # time without dst
             mock_time.daylight = False
             # and localtime also without dst
-            mock_localtime = mock.Mock()
+            mock_localtime = Mock()
             mock_time.localtime.return_value = mock_localtime
             mock_localtime.tm_isdst = 0
             tz_format = timezone.get_local_time_zone_format(tz_format_mode)
@@ -1870,5 +1870,5 @@ def test_timepoint_at_year(test_year):
 
 
 if __name__ == "__main__":
-    unittest.TextTestRunner(verbosity=2).run(
-        unittest.TestLoader().loadTestsFromTestCase(TestSuite))
+    TextTestRunner(verbosity=2).run(
+        TestLoader().loadTestsFromTestCase(TestSuite))
