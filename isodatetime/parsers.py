@@ -581,8 +581,7 @@ class DurationParser(object):
                 raise ISO8601SyntaxError("duration", expression)
             if timepoint.get_is_week_date():
                 raise ISO8601SyntaxError("duration", expression)
-            result_map = {}
-            result_map["years"] = timepoint.year
+            result_map = {"years": timepoint.year}
             if timepoint.get_is_calendar_date():
                 result_map["months"] = timepoint.month_of_year
                 result_map["days"] = timepoint.day_of_month
