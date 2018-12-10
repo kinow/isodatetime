@@ -1333,6 +1333,8 @@ class TimePoint(object):
         return hash_
 
     def __eq__(self, other: "TimePoint") -> bool:
+        if other is None:
+            return False
         if self.truncated != other.truncated:
             return False
         if self.get_props() != other.get_props():
@@ -1361,6 +1363,8 @@ class TimePoint(object):
         return not self.__eq__(other)
 
     def __lt__(self, other: "TimePoint") -> bool:
+        if other is None:
+            return False
         if self.truncated != other.truncated:
             return False
         if self.get_props() != other.get_props():
@@ -1385,6 +1389,8 @@ class TimePoint(object):
         return False
 
     def __le__(self, other: "TimePoint") -> bool:
+        if other is None:
+            return False
         if self.truncated != other.truncated:
             return False
         if self.get_props() != other.get_props():
@@ -1409,6 +1415,8 @@ class TimePoint(object):
         return False
 
     def __gt__(self, other: "TimePoint") -> bool:
+        if other is None:
+            return False
         if self.truncated != other.truncated:
             return False
         if self.get_props() != other.get_props():
@@ -1433,6 +1441,8 @@ class TimePoint(object):
         return False
 
     def __ge__(self, other: "TimePoint") -> bool:
+        if other is None:
+            return False
         if self.truncated != other.truncated:
             return False
         if self.get_props() != other.get_props():
