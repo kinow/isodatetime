@@ -19,6 +19,7 @@
 """This tests the ISO 8601 parsing and data model functionality."""
 
 import copy
+from itertools import chain
 import multiprocessing
 import unittest
 from unittest.mock import patch, MagicMock, Mock
@@ -569,8 +570,8 @@ def get_timepointparser_tests(allow_only_basic=False,
                             time_expr
                         )
                         combo_info = {}
-                        for key, value in \
-                                list(info.items()) + list(time_info.items()):
+                        for key, value in chain(
+                                info.items(), time_info.items()):
                             combo_info[key] = value
                         yield combo_expr, combo_info
                         if skip_time_zones:
