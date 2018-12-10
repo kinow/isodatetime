@@ -1,6 +1,9 @@
 *.py[co]
 *.swp
 
+# tests
+.pytest_cache/
+
 # coverage
 .coverage
 .coverage.*
