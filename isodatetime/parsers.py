@@ -336,6 +336,7 @@ class TimePointParser(object):
     def _parse_from_custom_regex(self, regex, data_string, dump_format=None,
                                  source=None):
         """Parse data_string according to the regular expression in regex."""
+        regex = regex.replace(r"\\d", r"\d")
         try:
             compiled_regex = re.compile(regex)
         except sre_constants.error:
