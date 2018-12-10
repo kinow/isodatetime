@@ -1196,13 +1196,15 @@ class TestSuite(TestCase):
         )
         for hour_of_day in range(24):
             for minute_of_hour in [0, 30]:
-                test_dates = [data.TimePoint(
+                time_point = data.TimePoint(
                     year=year,
                     month_of_year=month_of_year,
                     day_of_month=day_of_month,
                     hour_of_day=hour_of_day,
                     minute_of_hour=minute_of_hour
-                ), test_dates[0].copy(), test_dates[0].copy(), test_dates[0].copy()]
+                )
+                test_dates = [time_point, time_point.copy(), time_point.copy(),
+                              time_point.copy()]
                 test_dates[0].set_time_zone_to_utc()
                 self.assertEqual(test_dates[0].time_zone.hours, 0,
                                  test_dates[0])
@@ -1551,16 +1553,16 @@ class TestSuite(TestCase):
             else:
                 forward_method = test_recurrence.get_next
                 backward_method = test_recurrence.get_prev
-            test_points = [test_recurrence[0],
-                           forward_method(test_points[-1]),
-                           forward_method(test_points[-1])]
+            test_points = [test_recurrence[0]]
+            test_points.append(forward_method(test_points[-1]))
+            test_points.append(forward_method(test_points[-1]))
             test_results = [str(point) for point in test_points]
             self.assertEqual(test_results, ctrl_results, expression)
             if test_recurrence[2] is not None:
-                test_points = [test_recurrence[2],
-                               backward_method(test_points[-1]),
-                               backward_method(test_points[-1]),
-                               backward_method(test_points[-1])]
+                test_points = [test_recurrence[2]]
+                test_points.append(backward_method(test_points[-1]))
+                test_points.append(backward_method(test_points[-1]))
+                test_points.append(backward_method(test_points[-1]))
             self.assertEqual(test_points[3], None, expression)
             test_points.pop(3)
             test_points.reverse()
