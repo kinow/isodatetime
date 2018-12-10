@@ -570,7 +570,7 @@ def get_timepointparser_tests(allow_only_basic=False,
                         )
                         combo_info = {}
                         for key, value in \
-                                info.items() + list(time_info.items()):
+                                list(info.items()) + list(time_info.items()):
                             combo_info[key] = value
                         yield combo_expr, combo_info
                         if skip_time_zones:
