@@ -6,18 +6,18 @@ language: python
 
 python:
   - 3.6
-#  - 3.7
+  - 3.7-dev
 env:
-#  - RUN_COVERAGE=false
+  - RUN_COVERAGE=false
   - RUN_COVERAGE=true
 
 matrix:
   fast_finish: true
-#  exclude:
-#    - python: 3.6
-#      env: RUN_COVERAGE=false
-#    - python: 3.7
-#      env: RUN_COVERAGE=true
+  exclude:
+    - python: 3.6
+      env: RUN_COVERAGE=false
+    - python: 3.7-dev
+      env: RUN_COVERAGE=true
 
 before_install:
   # Coverage dependencies
