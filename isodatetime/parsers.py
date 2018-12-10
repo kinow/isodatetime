@@ -558,7 +558,7 @@ class DurationParser(object):
             if not result:
                 continue
             result_map = result.groupdict()
-            for key, value in result_map.items():
+            for key, value in list(result_map.items()):
                 if value is None:
                     result_map.pop(key)
                     continue
