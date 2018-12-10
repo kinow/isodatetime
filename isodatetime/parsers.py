@@ -344,7 +344,7 @@ class TimePointParser(object):
         if not result:
             raise StrptimeConversionError(source, data_string)
         info = result.groupdict()
-        for property_, value in info.items():
+        for property_, value in list(info.items()):
             if property_ in data.PARSE_PROPERTY_TRANSLATORS:
                 info.pop(property_)
                 translator = data.PARSE_PROPERTY_TRANSLATORS[property_]
