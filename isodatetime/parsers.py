@@ -283,7 +283,7 @@ class TimePointParser(object):
             except (TypeError, ValueError):
                 pass
         info.update(date_info)
-        for key, value in time_info.items():
+        for key, value in list(time_info.items()):
             if key.endswith("_decimal"):
                 value = "0." + value
             try:
