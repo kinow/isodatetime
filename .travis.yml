@@ -38,11 +38,14 @@ script:
     while kill -0 $! >/dev/null 2>&1; do
       echo -n -e " \b" # never leave evidences!
       if [ $minutes == $limit ]; then
+        exit 1
         break;
       fi
       minutes=$((minutes+1))
       sleep 60
     done
+    wait $!
+    exit $?
 after_script:
   - coverage xml --ignore-errors
   # Report metrics, such as coverage
