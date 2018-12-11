@@ -24,6 +24,8 @@ before_install:
   - pip install coverage pytest-cov
   # Code style dependencies
   - pip install pycodestyle
+before_script:
+  - pycodestyle -v isodatetime
 script:
   - |
     export COVERAGE_PROCESS_START="${TRAVIS_BUILD_DIR}/.coveragerc"
@@ -39,15 +41,13 @@ script:
       echo -n -e " \b" # never leave evidences!
       if [ $minutes == $limit ]; then
         exit 1
-        break;
       fi
       minutes=$((minutes+1))
       sleep 60
     done
     wait $!
     exit $?
-after_script:
+after_success:
   - coverage xml --ignore-errors
   # Report metrics, such as coverage
   - '[[ "$RUN_COVERAGE" = true ]] && bash <(curl -s https://codecov.io/bash)'
-  - pycodestyle -v isodatetime
