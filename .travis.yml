@@ -35,9 +35,7 @@ before_install:
 before_script:
   - pycodestyle -v isodatetime
 script:
-  - |
-    export COVERAGE_PROCESS_START="${TRAVIS_BUILD_DIR}/.coveragerc"
-    tox
+  - tox
 after_success:
   - coverage xml --ignore-errors
   # Report metrics, such as coverage
