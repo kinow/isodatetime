@@ -21,7 +21,7 @@ from setuptools import setup
 # Monkey patching to disable version normalization, as we are using dates with
 # leading zeroes
 # https://github.com/pypa/setuptools/issues/308
-from setuptools.extern.packaging import version
+from setuptools._vendor.packaging import version
 from isodatetime import __version__
 
 
