@@ -27,7 +27,7 @@ matrix:
 
 before_install:
   # Tox with Travis environment support
-  - pip install tox-travis
+  - pip install setuptools tox-travis
   # Coverage dependencies
   - pip install coverage pytest-cov
   # Code style dependencies
