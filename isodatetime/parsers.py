@@ -237,6 +237,15 @@ class TimePointParser(object):
         """Parse a user-supplied timepoint string.
 
         Args:
+            timepoint_string (str):
+                String the date and time properties.
+            dump_format (str, optional):
+                If dump_as_parsed is True, then this value is not used.
+                Otherwise this defines how values are displayed on write.
+            dump_as_parsed (bool, optional):
+                Optional flag that when True will force the dump_format
+                to be retrieved automatically based on the timepoint
+                string date and time properties.
             validate (bool, optional):
                 If True the datetime will be "ticked over", if this results in
                 a change a ValueError will be raised.
