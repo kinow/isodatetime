@@ -32,31 +32,30 @@ Python API:
 
 <!-- GitHub Python syntax highlighting has issues with datetimes, Ruby works
      resonably well as a standin. -->
-```ruby
+```pycon
 >>> import isodatetime.parsers as parse
 >>> import isodatetime.dumpers as dump
-
-# Dates and times
+>>> 
+>>> # Dates and times
 >>> date_time = parse.TimePointParser().parse('2000-01-01T00:00Z')
 >>> date_time.month_of_year
 1
-
-# Durations
+>>> 
+>>> # Durations
 >>> duration = parse.DurationParser().parse('P1YT3H')
 >>> duration.get_days_and_seconds()
 (365.0, 10800.0)
 >>> date_time + duration
 2001-01-01T03:00:00Z
-
-# Recurrences
+>>> 
+>>> # Recurrences
 >>> recurrence = parse.TimeRecurrenceParser().parse('R/1999/P1Y')
 >>> recurrence.get_next(date_time)
 2001-01-01T00:00:00Z
-
-# Output
+>>> 
+>>> # Output
 >>> dump.TimePointDumper().strftime(date_time, '%d/%M/%Y %H:%M:%S')
 '01/00/2000 00:00:00'
-
 ```
 
 CLI:
